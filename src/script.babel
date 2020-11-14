@@ -1,0 +1,65 @@
+class App extends React.Component{
+  state = {
+      quotes: [], 
+      index: 0
+  }
+  
+  componentDidMount(){
+    
+ //cosa de mandinga, despues de probar mil veces haciendo fetch a un json en mi cuenta de github empezó a funcionar solo despues de dar centenares de errores.   
+    fetch("https://usuario9342.github.io/QuoteMachine/minedata/quotes.json")
+      .then(res => res.json())
+      .then(res => {this.setState({quotes: res.quotes}, this.getRandomQuote)
+      .catch(error => {console.log(error)})              
+    })
+  }
+  
+getRandomQuote = () => {
+    const {quotes} = this.state;
+    
+    if(quotes.length > 0){
+      const index = Math.floor(Math.random() * quotes.length);
+      this.setState({index});
+    //una mejora a esto sería que no pueda dar dos veces consecutivas el mismo indice.
+    }
+  }
+  
+  render(){
+    
+    const {quotes, index} = this.state;
+    const quote = quotes[index];
+    
+    const tweetURL = "https://twitter.com/intent/tweet?text="
+//no pude hacer funcionar esto, siempre lo bloquea twitter.
+    
+    return (
+          <div className = "wrapper d-flex justify-content-center align-items-center">
+            <div className = "col-7 box rounded-lg box p-5">
+              <div  id="quote-box">
+             {
+                  quote &&  <p id="text">"{quote.quote}"</p>
+             }
+              <div class = "d-flex justify-content-end">                  
+              {
+                  
+                  quote && <div className = "mb-3"><cite class="" id="author">-{quote.author}</cite></div>
+                  
+              }  
+              
+              </div>
+                <div class="d-flex justify-content-between">
+                  <a className="btn btn-primary" target="_blank" href= "https://twitter.com/intent/tweet?text=" id="tweet-quote"><i className="fa fa-twitter"></i> tweet</a>
+                    <button class="btn btn-primary" id="new-quote" onClick = {this.getRandomQuote} ><i className="fa fa-chevron-right"></i> next quote</button>
+                    
+                </div>
+              </div>
+            </div>  
+          </div>  
+ )}
+}
+
+
+
+
+const app = document.querySelector("#root");
+ReactDOM.render(<App title='Example Component' />, app);

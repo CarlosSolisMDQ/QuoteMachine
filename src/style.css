@@ -1,0 +1,38 @@
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: baseline;
+  
+}
+
+body {
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg,           rgba(34,193,195,1) 0%, rgba(19,13,1,1) 49%);
+}
+
+.box {
+  background-color: white;
+}
+
+.wrapper {
+  height: 100vh; 
+}
+
+i {
+  color: white;
+}
+
+#text {
+  color: #5D18D5;
+  font-family: 'Xanh Mono', monospace;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#author {
+  font-weight: bold;
+}
